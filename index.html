@@ -55,6 +55,15 @@
     @media (max-width:640px) { h1 { font-size:2rem; } }
   </style>
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-36NCFVQVHT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-36NCFVQVHT');
+</script>
 <body>
 
   <header>
@@ -118,15 +127,6 @@
 
     document.getElementById("urlInput").addEventListener("keypress", e => { if (e.key === "Enter") extract(); });
   </script>
-
-  <!-- Google Analytics (LIVE) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HQ7ZQBN8J2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-HQ7ZQBN8J2');
-  </script>
-
 </body>
+
 </html>
