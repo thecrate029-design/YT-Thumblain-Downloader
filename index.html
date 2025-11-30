@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- Search Console Verification (LIVE) -->
+  <meta name="google-site-verification" content="4Tp1HLO-IA-No1a0UUPxOLtdjd8pqXR44tYsEKVNmU8" />
+  
+  <title>YouTube Thumbnail Downloader - Download HQ & HD Thumbnails Free</title>
+  <meta name="description" content="Download any YouTube thumbnail in Full HD (1080p), HQ, SD quality instantly. Just paste the video URL – 100% free, no signup, no watermark. Works on mobile & desktop."/>
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="YouTube Thumbnail Downloader – Free HD Quality"/>
+  <meta property="og:description" content="Instantly download YouTube thumbnails in maximum resolution. Free, fast, no registration required."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="https://yt-three-xi.vercel.app/og-image.jpg"/>
+  
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "YouTube Thumbnail Downloader",
+    "description": "Free online tool to download YouTube video thumbnails in full HD quality.",
+    "url": "https://yt-three-xi.vercel.app",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "All",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root { --primary: #ff0000; --dark: #111; }
+    body { margin:0; font-family:'Inter',sans-serif; background:#fff; color:#333; line-height:1.6; }
+    header { background:var(--primary); color:white; text-align:center; padding:2rem 1rem; }
+    h1 { margin:0; font-size:2.5rem; }
+    .subtitle { font-size:1.2rem; opacity:0.9; margin-top:0.5rem; }
+    .container { max-width:900px; margin:2rem auto; padding:0 1rem; }
+    .tool { background:#f8f9fa; border-radius:12px; padding:2rem; box-shadow:0 10px 30px rgba(0,0,0,0.08); text-align:center; }
+    input[type="text"] { width:100%; padding:1rem; font-size:1.1rem; border:2px solid #ddd; border-radius:8px; margin:1rem 0; box-sizing:border-box; }
+    button { background:var(--primary); color:white; border:none; padding:1rem 2rem; font-size:1.1rem; border-radius:8px; cursor:pointer; font-weight:600; }
+    button:hover { background:#cc0000; }
+    .sizes { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:1rem; margin:2rem 0; }
+    .size-card { background:white; border:2px solid #eee; border-radius:10px; padding:1rem; text-align:center; transition:0.3s; }
+    .size-card:hover { border-color:var(--primary); transform:translateY(-5px); }
+    .size-card img { max-width:100%; border-radius:8px; }
+    .size-card a { display:block; margin-top:0.8rem; color:var(--primary); font-weight:600; text-decoration:none; }
+    footer { text-align:center; padding:3rem 1rem; background:#111; color:#aaa; }
+    .ad-slot { margin:2rem auto; max-width:700px; min-height:100px; background:#f0f0f0; border:2px dashed #ccc; display:flex; align-items:center; justify-content:center; font-size:1.2rem; color:#666; }
+    @media (max-width:640px) { h1 { font-size:2rem; } }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>YouTube Thumbnail Downloader</h1>
+    <p class="subtitle">Download any YouTube thumbnail in Full HD • HQ • SD – 100% Free & Instant</p>
+  </header>
+
+  <div class="container">
+    <div class="ad-slot">← Your Adsense Banner Here (728×90 or responsive) →</div>
+
+    <div class="tool">
+      <h2>Paste YouTube Video URL Below</h2>
+      <input type="text" id="urlInput" placeholder="https://www.youtube.com/watch?v=..." />
+      <button onclick="extract()">Get Thumbnail</button>
+      <p style="margin-top:1rem; color:#666;">Works with YouTube Shorts & regular videos</p>
+    </div>
+
+    <div id="result" style="display:none;">
+      <h2 style="text-align:center;">Select Quality & Download</h2>
+      <div class="sizes" id="thumbnails"></div>
+    </div>
+
+    <div class="ad-slot" style="margin-top:3rem;">← Your Adsense Rectangle Here (300×250) →</div>
+  </div>
+
+  <footer>
+    <p>YouTube Thumbnail Downloader © 2025 – Free Tool • <a href="/privacy.html" style="color:#fff;">Privacy Policy</a></p>
+  </footer>
+
+  <script>
+    function extract() {
+      const input = document.getElementById("urlInput").value.trim();
+      const videoId = input.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([^&\n?#]+)/i);
+      if (!videoId) { alert("Please enter a valid YouTube URL"); return; }
+      const id = videoId[1];
+      const qualities = [
+        { name: "Max Resolution (1920×1080)", url: `https://img.youtube.com/vi/${id}/maxresdefault.jpg` },
+        { name: "HQ Default (1280×720)",      url: `https://img.youtube.com/vi/${id}/hqdefault.jpg` },
+        { name: "MQ Default (640×480)",       url: `https://img.youtube.com/vi/${id}/mqdefault.jpg` },
+        },
+        { name: "SD Default (480×360)",       url: `https://img.youtube.com/vi/${id}/sddefault.jpg` },
+        { name: "Small (120×90)",             url: `https://img.youtube.com/vi/${id}/0.jpg` }
+      ];
+
+      const container = document.getElementById("thumbnails");
+      container.innerHTML = "";
+      qualities.forEach(q => {
+        const div = document.createElement("div");
+        div.className = "size-card";
+        div.innerHTML = `
+          <img src="${q.url}" alt="${q.name}" loading="lazy" onerror="this.style.display='none'">
+          <p><strong>${q.name}</strong></p>
+          <a href="${q.url}" download="youtube-thumbnail-${id}.jpg">Download</a>
+        `;
+        container.appendChild(div);
+      });
+
+      document.getElementById("result").style.display = "block";
+      document.getElementById("result").scrollIntoView({ behavior: "smooth" });
+    }
+
+    document.getElementById("urlInput").addEventListener("keypress", e => { if (e.key === "Enter") extract(); });
+  </script>
+
+  <!-- Google Analytics (LIVE) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HQ7ZQBN8J2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HQ7ZQBN8J2');
+  </script>
+
+</body>
+</html>
